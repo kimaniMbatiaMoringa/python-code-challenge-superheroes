@@ -13,7 +13,7 @@ class Hero(db.Model):
 
     hero_powers = db.relationship('Hero_Powers',backref='hero')
 
-
+        
 class Hero_Powers(db.Model):
     __tablename__ = 'hero_powers'
 
