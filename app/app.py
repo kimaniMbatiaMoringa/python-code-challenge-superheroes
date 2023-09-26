@@ -150,4 +150,4 @@ hero1 = Hero(
     updated_at = x,)
 
 db.session.add(hero1)
-db.session.commit()
+db.session.commit
