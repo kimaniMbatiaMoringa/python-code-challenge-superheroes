@@ -5,9 +5,10 @@ function Home() {
   const [heros, setHeros] = useState([]);
 
   useEffect(() => {
-    fetch("/http://localhost:5555/heroes")
+    fetch("http://localhost:5555/heroes")
       .then((r) => r.json())
-      .then(setHeros);
+      .then(setHeros)
+      .then(alert("request made to heroes json"))
   }, []);
 
   return (

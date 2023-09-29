@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import json
 from flask import Flask, jsonify,request, make_response
 from flask_migrate import Migrate
 
@@ -15,6 +16,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 migrate = Migrate(app, db)
 
 db.init_app(app)
+
+class test():
+    def __init__(self,name):
+        self.name =name
+        
+        
 
 @app.route('/')
 def request():
@@ -33,22 +40,22 @@ def heroes():
         response = make_response(response_content)
         return response
     
-    if request.method == 'GET':
-        for hero in Hero.query.all():
-            hero_dict={
-                "id": hero.id,
-                "name": hero.name,
-                "super_name": hero.super_name,
-                #"created_at": hero.created_at,
-                #"updated_at": hero.updated_at
+    #if request.method == 'GET':
+    for hero in Hero.query.all():
+        hero_dict={
+            "id": hero.id,
+            "name": hero.name,
+            "super_name": hero.super_name,
+            #"created_at": hero.created_at,
+            #"updated_at": hero.updated_at
         }
         heroes.append(hero_dict)
-        response = make_response(
-        '<h1>Parse Hero JSON here</h1>',
+
+    response = make_response(
         jsonify(heroes),
         200
         )
-        return response
+    return response
 
 @app.route('/heroes/<int:id>')
 def heroes_by_id(id):
@@ -137,17 +144,6 @@ def post_hero_powers():
         )
         return response
 
-
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
 
-x = datetime.datetime.now()
-
-hero1 = Hero(
-    name = "Kim",
-    super_name = "Ratman",
-    created_at = x,
-    updated_at = x,)
-
-db.session.add(hero1)
-db.session.commit
