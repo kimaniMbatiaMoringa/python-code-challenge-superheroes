@@ -126,7 +126,7 @@ def power_by_id(id):
 
 @app.route('/hero_powers', methods=['GET', 'POST'])
 def post_hero_powers():
-    #hero_powers=[]
+    hero_powers=[]
     powers_exist = Hero_Powers.query.all()
 
     if not powers_exist:
@@ -134,11 +134,12 @@ def post_hero_powers():
         response = make_response(response_content)
         return response
     
-    else: response_content = '<h3>hero powers found!</h3>'
-    response = make_response(response_content)
-    return response
-
-"""     for item in Hero_Powers.query.all():
+    #else: response_content = '<h3>hero powers found!</h3>'
+    #response = make_response(response_content)
+    #return response
+    
+    if request.method == 'GET':
+     for item in Hero_Powers.query.all():
         heropowers_dict = {
             "id" : item.id,
             "strength" : item.strength,
@@ -169,7 +170,7 @@ def post_hero_powers():
             jsonify(hero_power_dict),
             201
         )
-        return response """
+        return response 
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
