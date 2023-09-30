@@ -12,7 +12,7 @@ class Hero(db.Model):
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
 
-    hero_powers = db.relationship('Hero_Powers',backref='hero')
+    #hero_powers = db.relationship('Hero_Powers',backref='hero')
 
         
 class Hero_Powers(db.Model):

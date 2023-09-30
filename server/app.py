@@ -126,12 +126,39 @@ def power_by_id(id):
 
 @app.route('/hero_powers', methods=['GET', 'POST'])
 def post_hero_powers():
+    #hero_powers=[]
+    powers_exist = Hero_Powers.query.all()
+
+    if not powers_exist:
+        response_content= '<h3>No hero_powers in the database!</h3>'
+        response = make_response(response_content)
+        return response
+    
+    else: response_content = '<h3>hero powers found!</h3>'
+    response = make_response(response_content)
+    return response
+
+"""     for item in Hero_Powers.query.all():
+        heropowers_dict = {
+            "id" : item.id,
+            "strength" : item.strength,
+            #"hero_id" : powers.hero_id,
+            #"created_at": hero.created_at,
+            #"updated_at": hero.updated_at
+        }
+        hero_powers.append(heropowers_dict)
+
+        response = make_response(
+            jsonify(hero_powers),
+            200
+        )
+        return response
 
     if request.method == 'POST':
         new_hero_power=Hero_Powers(
             id = request.form.get("name"),
             strength = request.form.get("super_name"),
-            hero_id = request.form.get("hero_id")
+            #hero_id = request.form.get("hero_id")
         )
         db.session.add(new_hero_power)
         db.session.commit()
@@ -142,7 +169,7 @@ def post_hero_powers():
             jsonify(hero_power_dict),
             201
         )
-        return response
+        return response """
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
